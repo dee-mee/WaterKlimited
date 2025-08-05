@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://waterleaders.co.ke/sitemap.xml
+
+# Disallow admin or sensitive areas (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow all search engines to crawl the site
+# This helps with SEO for water drilling services in Kenya
