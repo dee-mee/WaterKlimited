@@ -1,0 +1,132 @@
+/* Color Override CSS - Replace Orange with Blue/Green Theme */
+
+/* Override any remaining orange colors with our blue/green theme */
+
+/* Common orange color overrides */
+.bg-orange,
+[style*="background-color: #FF5722"],
+[style*="background-color: #ff5722"],
+[style*="background: #FF5722"],
+[style*="background: #ff5722"],
+[style*="background-color: rgb(255, 87, 34)"],
+[style*="background: rgb(255, 87, 34)"] {
+    background-color: #2E86AB !important;
+    background: #2E86AB !important;
+}
+
+/* Text color overrides */
+.text-orange,
+[style*="color: #FF5722"],
+[style*="color: #ff5722"],
+[style*="color: rgb(255, 87, 34)"] {
+    color: #2E86AB !important;
+}
+
+/* Button overrides - target common orange button classes */
+.btn-orange,
+.btn[style*="background-color: #FF5722"],
+.btn[style*="background-color: #ff5722"],
+.btn[style*="background: #FF5722"],
+.btn[style*="background: #ff5722"] {
+    background-color: #2E86AB !important;
+    border-color: #2E86AB !important;
+}
+
+.btn-orange:hover,
+.btn[style*="background-color: #FF5722"]:hover,
+.btn[style*="background-color: #ff5722"]:hover {
+    background-color: #1B4D72 !important;
+    border-color: #1B4D72 !important;
+}
+
+/* Statistics and counter sections */
+.counter-number,
+.stats-number,
+.display-1,
+.display-2,
+.display-3 {
+    color: #2E86AB !important;
+}
+
+/* Override any Material Design orange colors */
+[style*="#FF5722"],
+[style*="#ff5722"],
+[style*="rgb(255, 87, 34)"],
+[style*="rgba(255, 87, 34"] {
+    background-color: #2E86AB !important;
+    color: #2E86AB !important;
+}
+
+/* Specific overrides for common orange elements */
+.orange-accent,
+.accent-orange,
+.highlight-orange {
+    background-color: #2E86AB !important;
+    color: #FFFFFF !important;
+}
+
+/* Override any remaining orange borders */
+[style*="border-color: #FF5722"],
+[style*="border-color: #ff5722"],
+.border-orange {
+    border-color: #2E86AB !important;
+}
+
+/* Team member profile overrides */
+.team-member .accent,
+.profile-accent,
+.member-highlight {
+    background-color: #2E86AB !important;
+}
+
+/* Contact section button overrides */
+.contact-btn,
+.cta-button,
+.action-button {
+    background-color: #2E86AB !important;
+    border-color: #2E86AB !important;
+}
+
+.contact-btn:hover,
+.cta-button:hover,
+.action-button:hover {
+    background-color: #1B4D72 !important;
+    border-color: #1B4D72 !important;
+}
+
+/* Carousel and slider overrides */
+.carousel-control-next,
+.carousel-control-prev,
+.owl-nav button {
+    background-color: #2E86AB !important;
+}
+
+/* Progress bar overrides */
+.progress-bar {
+    background-color: #2E86AB !important;
+}
+
+/* Alert overrides */
+.alert-warning {
+    background-color: #E3F2FD !important;
+    border-color: #2E86AB !important;
+    color: #1B4D72 !important;
+}
+
+/* Badge overrides */
+.badge-warning {
+    background-color: #2E86AB !important;
+}
+
+/* Any remaining orange utility classes */
+.bg-warning {
+    background-color: #2E86AB !important;
+}
+
+.text-warning {
+    color: #2E86AB !important;
+}
+
+.border-warning {
+    border-color: #2E86AB !important;
+}
