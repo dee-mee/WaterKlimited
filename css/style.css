@@ -125,17 +125,59 @@ h6,
 
 /* Hamburger menu button styling */
 .navbar-toggler {
-    margin-left: 1rem;
-    margin-right: 1.5rem; /* Add right margin for better spacing */
-    padding: 0.5rem 0.75rem;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
+    margin: 0 1.25rem;
+    padding: 0.75rem;
+    width: 48px;
+    height: 48px;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.navbar-toggler:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.3);
+}
+
+.navbar-toggler .navbar-toggler-icon {
+    width: 24px;
+    height: 2px;
+    background-color: #fff;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.navbar-toggler .navbar-toggler-icon::before,
+.navbar-toggler .navbar-toggler-icon::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background-color: #fff;
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.navbar-toggler .navbar-toggler-icon::before {
+    transform: translateY(-8px);
+}
+
+.navbar-toggler .navbar-toggler-icon::after {
+    transform: translateY(8px);
+}
+
+.navbar-toggler:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Adjust navbar brand padding on mobile */
 @media (max-width: 991.98px) {
     .navbar .navbar-brand {
-        padding-left: 1rem;
+        padding-left: 1.25rem;
+        padding-right: 0.5rem;
     }
     
     .navbar-collapse {
