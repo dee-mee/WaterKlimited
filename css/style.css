@@ -290,7 +290,97 @@ h6,
 }
 
 .navbar .dropdown-item:last-child {
-    margin-bottom: 0.5rem;
+    border-bottom: none;
+}
+
+/* Improved mobile dropdown menu */
+.navbar .dropdown-menu {
+    background-color: #f8f9fa;
+    border: 1px solid rgba(0,0,0,0.1);
+    margin-top: 0;
+}
+
+.navbar .dropdown-item {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.navbar .dropdown-toggle::after {
+    float: right;
+    margin-top: 0.5rem;
+}
+
+.navbar .dropdown-menu .dropdown-item {
+    padding-left: 2.5rem;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background: #fff;
+        margin-top: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .navbar-nav {
+        margin: 0 -15px;
+    }
+    
+    .nav-item {
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .nav-item:last-child {
+        border-bottom: none;
+    }
+    
+    .nav-link {
+        padding: 12px 20px !important;
+        color: #333 !important;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .dropdown-menu {
+        position: static !important;
+        float: none;
+        width: 100%;
+        margin: 0;
+        border: none;
+        box-shadow: none;
+        background-color: #f9f9f9;
+        border-radius: 0;
+    }
+    
+    .dropdown-item {
+        padding: 12px 15px 12px 35px !important;
+        font-size: 0.9em;
+        white-space: normal !important;
+        word-wrap: break-word;
+        word-break: break-word;
+        line-height: 1.5;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .dropdown-toggle::after {
+        float: right;
+        margin-top: 6px;
+        transition: transform 0.3s ease;
+    }
+    
+    .dropdown-toggle[aria-expanded="true"]::after {
+        transform: rotate(-180deg);
+    }
 }
 
 /* --- Service Page Hero/Banner --- */
@@ -353,7 +443,7 @@ h6,
     100% { opacity: 1; transform: translateY(0); }
 }
 
-}
+
 
 
 /*** Header ***/
