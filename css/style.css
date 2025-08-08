@@ -158,6 +158,31 @@ h6,
 }
 
 @media (max-width: 991.98px) {
+  /* Mobile-friendly dropdown styles */
+  .navbar .dropdown-menu {
+    min-width: 100vw;
+    left: -16px !important;
+    right: 0;
+    border-radius: 0 0 1rem 1rem;
+    box-shadow: 0 8px 24px rgba(30,144,255,0.07);
+    padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+    max-height: 60vh;
+    overflow-y: auto;
+    margin-top: 0.25rem;
+  }
+  .navbar .dropdown-item {
+    white-space: normal;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    margin: 0.25rem 0;
+    text-align: left;
+    border-radius: 0.5rem;
+    line-height: 1.25;
+  }
+  .navbar .dropdown-item br {
+    display: none;
+  }
+}
     .navbar .navbar-nav .nav-link  {
         margin-right: 0;
         padding: 10px 0;
