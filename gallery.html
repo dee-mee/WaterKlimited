@@ -98,15 +98,136 @@
             font-size: 0.9rem;
         }
         
-        /* Responsive adjustments */
-        @media (max-width: 767.98px) {
-            .gallery-item {
-                margin-bottom: 1.5rem;
+        /* Filter Toggle Buttons */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            position: relative;
+            padding: 12px 24px;
+            border: 2px solid #2E8B57;
+            background: transparent;
+            color: #2E8B57;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #2E8B57, #228B22);
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+        
+        .filter-btn:hover::before,
+        .filter-btn.active::before {
+            left: 0;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(46, 139, 87, 0.3);
+        }
+        
+        .filter-btn i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+        
+        /* Gallery Grid Layout */
+        #gallery-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+        
+        .gallery-grid-item {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+            padding: 0 15px 30px;
+            width: 100%;
+        }
+        
+        @media (min-width: 768px) {
+            .gallery-grid-item {
+                width: 50%;
             }
-            
-            .gallery-item img {
-                height: 200px;
+        }
+        
+        @media (min-width: 992px) {
+            .gallery-grid-item {
+                width: 33.333%;
             }
+        }
+        
+        .gallery-grid-item.hidden {
+            display: none;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+            transform: scale(0.8) translateY(20px);
+            pointer-events: none;
+        }
+        
+        .gallery-grid-item.visible {
+            display: block;
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: all;
+        }
+        
+        /* CSR Badge */
+        .csr-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            box-shadow: 0 2px 10px rgba(255, 107, 107, 0.3);
+        }
+        
+        /* Project Type Badge */
+        .project-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            box-shadow: 0 2px 10px rgba(78, 205, 196, 0.3);
         }
         
         /* Video Play Button */
@@ -135,54 +256,68 @@
             color: #2E8B57;
         }
         
-        /* Lightbox Customization */
-        .lb-data .lb-caption {
-            font-size: 16px;
-            line-height: 1.4;
-            color: #fff;
+        /* Responsive adjustments */
+        @media (max-width: 767.98px) {
+            .gallery-item {
+                margin-bottom: 1.5rem;
+            }
+            
+            .gallery-item img {
+                height: 200px;
+            }
+            
+            .filter-container {
+                gap: 0.5rem;
+            }
+            
+            .filter-btn {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
         }
         
-        .lb-data .lb-close {
-            background: url(../img/close.png) no-repeat;
-        }
-        
-        /* Video Lightbox Styles */
-        .video-lightbox {
-            padding: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
+        /* Loading Animation */
+        .gallery-loading {
+            display: none;
             text-align: center;
+            padding: 2rem;
         }
         
-        .video-lightbox video {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        .gallery-loading.active {
+            display: block;
         }
         
-        .video-caption {
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            margin-top: 15px;
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #2E8B57;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
         }
         
-        .video-caption h4 {
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Counter Animation */
+        .filter-count {
+            display: inline-block;
+            background: rgba(46, 139, 87, 0.1);
             color: #2E8B57;
-            margin-bottom: 5px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
         }
         
-        /* Make lightbox navigation more touch-friendly */
-        .lb-nav a.lb-prev,
-        .lb-nav a.lb-next {
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
-        }
-        
-        .lb-nav a.lb-prev:hover,
-        .lb-nav a.lb-next:hover {
-            opacity: 1;
+        .filter-btn.active .filter-count {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
         }
     </style>
 </head>
@@ -193,7 +328,6 @@
         <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
     </div>
     <!-- Spinner End -->
-
 
     <!-- Topbar Start -->
     <div class="container-fluid bg-dark px-0">
@@ -215,7 +349,6 @@
     </div>
     <!-- Topbar End -->
 
-
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top py-0 pe-5">
         <a href="index.html" class="navbar-brand ps-5 me-0 d-flex align-items-center">
@@ -231,16 +364,16 @@
                 <a href="index.html" class="nav-item nav-link">Home</a>
                 <a href="about.html" class="nav-item nav-link">About</a>
                 <li class="nav-item dropdown">
-    <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
-    <div class="dropdown-menu bg-light m-0">
-        <a href="hydrogeological.html" class="dropdown-item">Hydrogeological Survey & Permit Processing</a>
-        <a href="drilling.html" class="dropdown-item">Borehole Drilling</a>
-        <a href="testpumping.html" class="dropdown-item">Test Pumping & Water Quality Analysis</a>
-        <a href="pump-installation.html" class="dropdown-item">Pump Installation, Piping & Solarization</a>
-        <a href="waterbowser.html" class="dropdown-item">Water Bowser Services</a>
-        <a href="steel-tower.html" class="dropdown-item">Steel Water Tower Construction & Storage</a>
-    </div>
-</li>
+                    <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
+                    <div class="dropdown-menu bg-light m-0">
+                        <a href="hydrogeological.html" class="dropdown-item">Hydrogeological Survey & Permit Processing</a>
+                        <a href="drilling.html" class="dropdown-item">Borehole Drilling</a>
+                        <a href="testpumping.html" class="dropdown-item">Test Pumping & Water Quality Analysis</a>
+                        <a href="pump-installation.html" class="dropdown-item">Pump Installation, Piping & Solarization</a>
+                        <a href="waterbowser.html" class="dropdown-item">Water Bowser Services</a>
+                        <a href="steel-tower.html" class="dropdown-item">Steel Water Tower Construction & Storage</a>
+                    </div>
+                </li>
                 <a href="feature.html" class="nav-item nav-link">Projects</a>
                 <a href="gallery.html" class="nav-item nav-link active">Gallery</a>
                 <a href="contact.html" class="nav-item nav-link">Contact</a>
@@ -249,7 +382,6 @@
         </div>
     </nav>
     <!-- Navbar End -->
-
 
     <!-- Page Header Start -->
     <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
@@ -271,13 +403,32 @@
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                 <h2 class="text-primary mb-4">Our Project Gallery</h2>
-                <p class="mb-4">Explore our collection of successful water projects across Kenya</p>
+                <p class="mb-4">Explore our collection of successful water projects and CSR initiatives across Kenya</p>
             </div>
-            <div class="row g-4">
-                <!-- Image Gallery Item -->
-                
+            
+            <!-- Filter Buttons -->
+            <div class="filter-container wow fadeInUp" data-wow-delay="0.2s">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fas fa-th-large"></i>
+                    All Photos
+                    <span class="filter-count" id="count-all">0</span>
+                </button>
+                <button class="filter-btn" data-filter="csr">
+                    <i class="fas fa-heart"></i>
+                    CSR Initiatives
+                    <span class="filter-count" id="count-csr">0</span>
+                </button>
+            </div>
+            
+            <!-- Loading Animation -->
+            <div class="gallery-loading" id="gallery-loading">
+                <div class="loading-spinner"></div>
+                <p>Loading gallery items...</p>
+            </div>
+            
+            <div class="row g-4" id="gallery-container">
                 <!-- Video Gallery Item -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="videos" data-wow-delay="0.3s">
                     <div class="gallery-item h-100">
                         <a href="img/vid2.mp4" data-fancybox="gallery" data-caption="Drilling Process - Watch our team in action" data-type="video">
                             <div class="position-relative">
@@ -285,6 +436,7 @@
                                 <div class="video-play-icon">
                                     <i class="fa fa-play-circle fa-4x text-white"></i>
                                 </div>
+                                <div class="project-badge">Video</div>
                             </div>
                             <div class="gallery-caption p-4">
                                 <h5 class="text-primary mb-1">Drilling Process</h5>
@@ -294,172 +446,257 @@
                     </div>
                 </div>
                 
-                <!-- Gallery Item 2 -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <!-- Technical Project -->
+                <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="technical" data-wow-delay="0.3s">
                     <div class="gallery-item h-100">
-                        <a href="img/about-2.jpg" data-fancybox="gallery" data-caption="Pump Installation - Kiambu County">
-                            <img class="img-fluid" src="img/about-2.jpg" alt="Pump Installation">
+                        <a href="img/about-2.jpg" data-fancybox="gallery" data-caption="Professional Team - Kiambu County">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="img/about-2.jpg" alt="Professional Team">
+                                <div class="project-badge">Technical</div>
+                            </div>
                             <div class="gallery-caption p-4">
-                                <h5 class="text-primary mb-1">Our Team members</h5>
+                                <h5 class="text-primary mb-1">Our Team Members</h5>
+                                <span>Professional water solutions team</span>
                             </div>
                         </a>
                     </div>
                 </div>
-            
                 
-                <!-- Add more gallery items here -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <!-- Technical Project -->
+                <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="technical" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
-                        <a href="img/carousel-1.jpg" data-fancybox="gallery" data-caption="Water Storage Solutions - Machakos County">
-                            <img class="img-fluid" src="img/carousel-1.jpg" alt="Water Storage Solutions">
+                        <a href="img/carousel-1.jpg" data-fancybox="gallery" data-caption="Test Pumping Units - Machakos County">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="img/carousel-1.jpg" alt="Test Pumping Units">
+                                <div class="project-badge">Technical</div>
+                            </div>
                             <div class="gallery-caption p-4">
-                                <h5 class="text-primary mb-1">Test pumping units</h5>
+                                <h5 class="text-primary mb-1">Test Pumping Units</h5>
+                                <span>Advanced water testing equipment</span>
                             </div>
                         </a>
                     </div>
                 </div>
 
-                <!-- Dynamically added galleryimages -->
-                <!-- BEGIN galleryimages -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <!-- CSR Initiative -->
+                <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="csr" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
-                        <a href="img/galleryimages/1. .jpg" data-fancybox="gallery" data-caption="Our connection with the church">
-                            <img class="img-fluid" src="img/galleryimages/1. .jpg" alt="Our connection with the church">
+                        <a href="img/galleryimages/1. .jpg" data-fancybox="gallery" data-caption="Church Partnership - Community Outreach">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="img/galleryimages/1. .jpg" alt="Church Partnership">
+                                <div class="csr-badge">CSR</div>
+                            </div>
                             <div class="gallery-caption p-4">
-                                <h5 class="text-primary mb-1">Our connection with the church</h5>
-                                
+                                <h5 class="text-primary mb-1">Church Partnership</h5>
+                                <span>Community outreach and support</span>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                
+                <!-- CSR Initiative -->
+                <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="csr" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
-                        <a href="img/galleryimages/2. .jpg" data-fancybox="gallery" data-caption="Guest entertainment">
-                            <img class="img-fluid" src="img/galleryimages/2. .jpg" alt="Guest entertainment">
+                        <a href="img/galleryimages/2. .jpg" data-fancybox="gallery" data-caption="Community Events - Guest Entertainment">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="img/galleryimages/2. .jpg" alt="Community Events">
+                                <div class="csr-badge">CSR</div>
+                            </div>
                             <div class="gallery-caption p-4">
-                                <h5 class="text-primary mb-1">Guest entertainment</h5>
-                                
+                                <h5 class="text-primary mb-1">Community Events</h5>
+                                <span>Guest entertainment and engagement</span>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                
+                <!-- CSR Initiative -->
+                <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="csr" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
-                        <a href="img/galleryimages/4. .jpg" data-fancybox="gallery" data-caption="Our team with the community">
-                            <img class="img-fluid" src="img/galleryimages/4. .jpg" alt="Project Image 4">
+                        <a href="img/galleryimages/4. .jpg" data-fancybox="gallery" data-caption="Community Partnership - Local Engagement">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="img/galleryimages/4. .jpg" alt="Community Partnership">
+                                <div class="csr-badge">CSR</div>
+                            </div>
                             <div class="gallery-caption p-4">
-                                <h5 class="text-primary mb-1">Our team with the community</h5>
-                                
+                                <h5 class="text-primary mb-1">Community Partnership</h5>
+                                <span>Working together with local communities</span>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                
+                <!-- Technical Project -->
+                <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="technical" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
-                        <a href="img/galleryimages/7. .jpg" data-fancybox="gallery" data-caption="Heavy-duty borehole machine setup">
-                            <img class="img-fluid" src="img/galleryimages/7. .jpg" alt="Project Image 7">
+                        <a href="img/galleryimages/7. .jpg" data-fancybox="gallery" data-caption="Heavy-duty Borehole Machine Setup">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="img/galleryimages/7. .jpg" alt="Heavy-duty Borehole Machine">
+                                <div class="project-badge">Technical</div>
+                            </div>
                             <div class="gallery-caption p-4">
-                                <h5 class="text-primary mb-1">Heavy-duty borehole machine setup</h5>
-                                
+                                <h5 class="text-primary mb-1">Heavy-duty Equipment</h5>
+                                <span>Advanced borehole drilling machinery</span>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                
+                <!-- Technical Project -->
+                <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="csr" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
-                        <a href="img/galleryimages/8. .jpg" data-fancybox="gallery" data-caption="Drilling rig in action">
-                            <img class="img-fluid" src="img/galleryimages/8. .jpg" alt="Project Image 8">
+                        <a href="img/galleryimages/8. .jpg" data-fancybox="gallery" data-caption="Community Water Project">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="img/galleryimages/8. .jpg" alt="Community Water Project">
+                                <div class="csr-badge">CSR</div>
+                            </div>
                             <div class="gallery-caption p-4">
-                                <h5 class="text-primary mb-1">Drilling rig in action</h5>
-                                
+                                <h5 class="text-primary mb-1">Community Water Project</h5>
+                                <span>Bringing clean water to local communities</span>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                
+                <!-- CSR Initiative -->
+                <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="csr" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
-                        <a href="img/galleryimages/11. .jpg" data-fancybox="gallery" data-caption="Social events">
-                            <img class="img-fluid" src="img/galleryimages/11. .jpg" alt="Project Image 11">
+                        <a href="img/galleryimages/11. .jpg" data-fancybox="gallery" data-caption="Social Events - Community Building">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="img/galleryimages/11. .jpg" alt="Social Events">
+                                <div class="csr-badge">CSR</div>
+                            </div>
                             <div class="gallery-caption p-4">
-                                <h5 class="text-primary mb-1">Social events</h5>
-                                
+                                <h5 class="text-primary mb-1">Social Events</h5>
+                                <span>Building stronger communities together</span>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                
+                <!-- CSR Initiative -->
+                <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="csr" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
-                        <a href="img/galleryimages/12. .jpg" data-fancybox="gallery" data-caption="excited school children">
-                            <img class="img-fluid" src="img/galleryimages/12. .jpg" alt="Project Image 12">
+                        <a href="img/galleryimages/12. .jpg" data-fancybox="gallery" data-caption="School Support - Excited Children">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="img/galleryimages/12. .jpg" alt="School Support">
+                                <div class="csr-badge">CSR</div>
+                            </div>
                             <div class="gallery-caption p-4">
-                                <h5 class="text-primary mb-1">excited school children</h5>
-                                
+                                <h5 class="text-primary mb-1">School Support</h5>
+                                <span>Bringing joy and water to schools</span>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                
+                <!-- CSR Initiative -->
+                <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="csr" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
-                        <a href="img/galleryimages/14. .jpg" data-fancybox="gallery" data-caption="Pump Installation">
-                            <img class="img-fluid" src="img/galleryimages/14. .jpg" alt="Project Image 14">
+                        <a href="img/galleryimages/13. .jpg" data-fancybox="gallery" data-caption="Community Water Point">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="img/galleryimages/13. .jpg" alt="Community Water Point">
+                                <div class="csr-badge">CSR</div>
+                            </div>
+                            <div class="gallery-caption p-4">
+                                <h5 class="text-primary mb-1">Community Water Point</h5>
+                                <span>Providing clean water access to communities</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Technical Project -->
+                <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="technical" data-wow-delay="0.1s">
+                    <div class="gallery-item h-100">
+                        <a href="img/galleryimages/14. .jpg" data-fancybox="gallery" data-caption="Professional Pump Installation">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="img/galleryimages/14. .jpg" alt="Pump Installation">
+                                <div class="project-badge">Technical</div>
+                            </div>
                             <div class="gallery-caption p-4">
                                 <h5 class="text-primary mb-1">Pump Installation</h5>
-                                
+                                <span>Expert pump installation services</span>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                
+                <!-- Technical Project -->
+                <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="technical" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
-                        <a href="img/galleryimages/15. .jpg" data-fancybox="gallery" data-caption="Our Headquarters">
-                            <img class="img-fluid" src="img/galleryimages/15. .jpg" alt="Project Image 15">
+                        <a href="img/galleryimages/15. .jpg" data-fancybox="gallery" data-caption="Company Headquarters">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="img/galleryimages/15. .jpg" alt="Headquarters">
+                                <div class="project-badge">Technical</div>
+                            </div>
                             <div class="gallery-caption p-4">
                                 <h5 class="text-primary mb-1">Our Headquarters</h5>
-                                
+                                <span>H2O Leaders Plaza, Utawala</span>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                
+                <!-- Technical Project -->
+                <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="technical" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
-                        <a href="img/galleryimages/16. .jpg" data-fancybox="gallery" data-caption="Solar Installations">
-                            <img class="img-fluid" src="img/galleryimages/16. .jpg" alt="Project Image 16">
+                        <a href="img/galleryimages/16. .jpg" data-fancybox="gallery" data-caption="Solar Power Installations">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="img/galleryimages/16. .jpg" alt="Solar Installations">
+                                <div class="project-badge">Technical</div>
+                            </div>
                             <div class="gallery-caption p-4">
                                 <h5 class="text-primary mb-1">Solar Installations</h5>
-                                
+                                <span>Sustainable solar-powered water solutions</span>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                
+                <!-- Technical Project -->
+                <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="technical" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
-                        <a href="img/galleryimages/17. .jpg" data-fancybox="gallery" data-caption="Borehole Rehabilitation">
-                            <img class="img-fluid" src="img/galleryimages/17. .jpg" alt="Project Image 17">
+                        <a href="img/galleryimages/17. .jpg" data-fancybox="gallery" data-caption="Borehole Rehabilitation Services">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="img/galleryimages/17. .jpg" alt="Borehole Rehabilitation">
+                                <div class="project-badge">Technical</div>
+                            </div>
                             <div class="gallery-caption p-4">
                                 <h5 class="text-primary mb-1">Borehole Rehabilitation</h5>
-                                
+                                <span>Restoring water access through rehabilitation</span>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                
+                <!-- Technical Project -->
+                <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="technical" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
-                        <a href="img/galleryimages/18. .jpg" data-fancybox="gallery" data-caption="Our team">
-                            <img class="img-fluid" src="img/galleryimages/18. .jpg" alt="Project Image 18">
+                        <a href="img/galleryimages/18. .jpg" data-fancybox="gallery" data-caption="Professional Team Members">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="img/galleryimages/18. .jpg" alt="Professional Team">
+                                <div class="project-badge">Technical</div>
+                            </div>
                             <div class="gallery-caption p-4">
-                                <h5 class="text-primary mb-1">Our team</h5>
-                                
+                                <h5 class="text-primary mb-1">Our Expert Team</h5>
+                                <span>Skilled professionals delivering excellence</span>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                
+                <!-- Technical Project -->
+                <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="technical" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
-                        <a href="img/galleryimages/20. .jpg" data-fancybox="gallery" data-caption="Borehole Rehabilitation">
-                            <img class="img-fluid" src="img/galleryimages/20. .jpg" alt="Project Image 20">
+                        <a href="img/galleryimages/20. .jpg" data-fancybox="gallery" data-caption="Advanced Borehole Rehabilitation">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="img/galleryimages/20. .jpg" alt="Advanced Rehabilitation">
+                                <div class="project-badge">Technical</div>
+                            </div>
                             <div class="gallery-caption p-4">
-                                <h5 class="text-primary mb-1">Borehole Rehabilitation</h5>
-                                
+                                <h5 class="text-primary mb-1">Advanced Rehabilitation</h5>
+                                <span>State-of-the-art borehole restoration</span>
                             </div>
                         </a>
                     </div>
@@ -468,7 +705,6 @@
         </div>
     </div>
     <!-- Gallery End -->
-
 
     <!-- Footer Start -->
     <div class="container-fluid footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
@@ -513,13 +749,8 @@
     </div>
     <!-- Footer End -->
 
-
-
-
-
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
-
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -535,145 +766,162 @@
     <!-- Gallery Script -->
     <script>
         $(document).ready(function() {
-            // Create a group of all gallery items for navigation
-            const imageGalleryItems = [];
-            const videoGalleryItems = [];
-            let currentGallery = [];
-            
-            // Initialize lightbox with swipe support
-            lightbox.option({
-                'resizeDuration': 200,
-                'wrapAround': true,
-                'showImageNumberLabel': false,
-                'disableScrolling': true,
-                'albumLabel': 'Item %1 of %2',
-                'alwaysShowNavOnTouchDevices': true,
-                'fadeDuration': 200,
-                'imageFadeDuration': 200,
-                'showNavOnTouchDevices': true,
-                'album': [] // We'll populate this dynamically
-            });
-            
-            // Group all gallery items
-            $('a[data-lightbox="gallery"]').each(function() {
-                imageGalleryItems.push({
-                    src: $(this).attr('href'),
-                    title: $(this).data('title') || '',
-                    type: 'image'
-                });
-            });
-            
-            $('.video-gallery-item').each(function() {
-                videoGalleryItems.push({
-                    src: 'img/videos/' + $(this).data('video'),
-                    poster: $(this).data('poster'),
-                    title: $(this).find('h5').text(),
-                    description: $(this).find('span').text(),
-                    type: 'video'
-                });
-            });
-            
-            // Combine all items into one gallery
-            currentGallery = [...imageGalleryItems, ...videoGalleryItems];
-            
-            // Handle gallery item clicks
-            $('a[data-lightbox="gallery"], .video-gallery-item').on('click', function(e) {
-                e.preventDefault();
-                const index = $(this).closest('.col-md-6').index();
-                openGallery(index);
-            });
-            
-            function openGallery(startIndex) {
-                const items = currentGallery.map((item, index) => {
-                    if (item.type === 'video') {
-                        return {
-                            src: `
-                                <div class="video-lightbox">
-                                    <video controls autoplay style="width: 100%; max-width: 1000px;">
-                                        <source src="${item.src}" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                    <div class="video-caption mt-3">
-                                        <h4>${item.title}</h4>
-                                        <p>${item.description}</p>
-                                    </div>
-                                </div>
-                            `,
-                            type: 'html'
-                        };
-                    } else {
-                        return {
-                            src: item.src,
-                            type: 'image',
-                            title: item.title
-                        };
-                    }
-                });
-                
-                $.fancybox.open(items, {
-                    loop: true,
-                    buttons: [
-                        'zoom',
-                        'slideShow',
-                        'fullScreen',
-                        'thumbs',
-                        'close'
-                    ],
-                    animationEffect: 'fade',
-                    transitionEffect: 'fade',
-                    thumbs: {
-                        autoStart: true
-                    },
-                    afterShow: function(instance, current) {
-                        // Pause all other videos when opening a new one
-                        $('video').not($(current.$content).find('video')).each(function() {
-                            this.pause();
-                        });
-                    },
-                    afterClose: function() {
-                        // Pause video when closing lightbox
-                        $('video').trigger('pause');
-                    }
-                }, startIndex);
-            }
-            
-            // Add keyboard navigation
-            $(document).on('keydown', function(e) {
-                if (e.key === 'ArrowLeft') {
-                    $.fancybox.prev();
-                } else if (e.key === 'ArrowRight') {
-                    $.fancybox.next();
-                } else if (e.key === 'Escape') {
-                    $.fancybox.close();
+            // Initialize Fancybox
+            Fancybox.bind("[data-fancybox]", {
+                loop: true,
+                buttons: [
+                    "zoom",
+                    "slideShow",
+                    "fullScreen",
+                    "thumbs",
+                    "close"
+                ],
+                animationEffect: "fade",
+                transitionEffect: "fade",
+                thumbs: {
+                    autoStart: true
                 }
             });
+
+            // Gallery Filter Functionality
+            let currentFilter = 'all';
+            const galleryContainer = $('#gallery-container');
+            const loadingElement = $('#gallery-loading');
             
-            // Add swipe support for mobile
+            // Count items and update counters
+            function updateCounters() {
+                const counts = {
+                    all: $('.gallery-grid-item').length,
+                    csr: $('.gallery-grid-item[data-category="csr"]').length
+                };
+                
+                Object.keys(counts).forEach(category => {
+                    $(`#count-${category}`).text(counts[category]);
+                });
+            }
+            
+            // Filter function with animation
+            function filterGallery(category) {
+                if (category === currentFilter) return;
+                
+                currentFilter = category;
+                
+                // Show loading
+                loadingElement.addClass('active');
+                
+                // Hide all items first
+                $('.gallery-grid-item').removeClass('visible').addClass('hidden');
+                
+                setTimeout(() => {
+                    // Show filtered items
+                    if (category === 'all') {
+                        $('.gallery-grid-item').removeClass('hidden').addClass('visible');
+                    } else {
+                        $(`.gallery-grid-item[data-category="${category}"]`).removeClass('hidden').addClass('visible');
+                    }
+                    
+                    // Hide loading
+                    loadingElement.removeClass('active');
+                    
+                    // Update active button
+                    $('.filter-btn').removeClass('active');
+                    $(`.filter-btn[data-filter="${category}"]`).addClass('active');
+                    
+                    // Smooth scroll to gallery
+                    $('html, body').animate({
+                        scrollTop: $('#gallery-container').offset().top - 100
+                    }, 800);
+                    
+                    // Reinitialize animations for visible items
+                    if (typeof WOW !== 'undefined') {
+                        new WOW().init();
+                    }
+                }, 500);
+            }
+            
+            // Filter button click handlers
+            $('.filter-btn').on('click', function(e) {
+                e.preventDefault();
+                const filter = $(this).data('filter');
+                filterGallery(filter);
+            });
+            
+            // Keyboard navigation for filters (1 for All, 2 for CSR)
+            $(document).on('keydown', function(e) {
+                if (e.key === '1') filterGallery('all');
+                if (e.key === '2') filterGallery('csr');
+            });
+            
+            // Initialize counters
+            updateCounters();
+            
+            // Add hover effects for gallery items
+            $('.gallery-item').hover(
+                function() {
+                    $(this).addClass('hover-effect');
+                },
+                function() {
+                    $(this).removeClass('hover-effect');
+                }
+            );
+            
+            // Touch support for mobile filter buttons
             let touchStartX = 0;
             let touchEndX = 0;
             
-            $(document).on('touchstart', '.fancybox-content', function(e) {
+            $('.filter-container').on('touchstart', function(e) {
                 touchStartX = e.originalEvent.touches[0].clientX;
             });
             
-            $(document).on('touchmove', '.fancybox-content', function(e) {
-                touchEndX = e.originalEvent.touches[0].clientX;
+            $('.filter-container').on('touchend', function(e) {
+                touchEndX = e.originalEvent.changedTouches[0].clientX;
+                handleSwipe();
             });
             
-            $(document).on('touchend', '.fancybox-content', function() {
+            function handleSwipe() {
                 const swipeThreshold = 50;
                 const diff = touchStartX - touchEndX;
                 
                 if (Math.abs(diff) > swipeThreshold) {
-                    if (diff > 0) {
-                        // Swipe left - go to next
-                        $.fancybox.next();
-                    } else {
-                        // Swipe right - go to previous
-                        $.fancybox.prev();
+                    const filters = ['all', 'csr'];
+                    const currentIndex = filters.indexOf(currentFilter);
+                    
+                    if (diff > 0 && currentIndex < filters.length - 1) {
+                        // Swipe left - next filter
+                        filterGallery(filters[currentIndex + 1]);
+                    } else if (diff < 0 && currentIndex > 0) {
+                        // Swipe right - previous filter
+                        filterGallery(filters[currentIndex - 1]);
                     }
                 }
+            }
+            
+            // Add loading animation to images
+            $('.gallery-item img').on('load', function() {
+                $(this).addClass('loaded');
+            }).each(function() {
+                if (this.complete) {
+                    $(this).addClass('loaded');
+                }
             });
+            
+            // Lazy loading for better performance
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src || img.src;
+                            img.classList.remove('lazy');
+                            observer.unobserve(img);
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('img[data-src]').forEach(img => {
+                    imageObserver.observe(img);
+                });
+            }
         });
     </script>
 
