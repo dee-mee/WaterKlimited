@@ -403,7 +403,7 @@
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                 <h2 class="text-primary mb-4">Our Project Gallery</h2>
-                <p class="mb-4">Explore our collection of successful water projects and CSR initiatives across Kenya</p>
+                <p class="mb-4">Explore our collection of successful water projects and Corporate Social Responsibility initiatives across Kenya</p>
             </div>
             
             <!-- Filter Buttons -->
@@ -415,7 +415,7 @@
                 </button>
                 <button class="filter-btn" data-filter="csr">
                     <i class="fas fa-heart"></i>
-                    CSR Initiatives
+                    Corporate Social Responsibility
                     <span class="filter-count" id="count-csr">0</span>
                 </button>
             </div>
@@ -478,7 +478,7 @@
                     </div>
                 </div>
 
-                <!-- CSR Initiative -->
+                <!-- Corporate Social Responsibility Initiative -->
                 <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="csr" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
                         <a href="img/galleryimages/1. .jpg" data-fancybox="gallery" data-caption="Church Partnership - Community Outreach">
@@ -494,7 +494,7 @@
                     </div>
                 </div>
                 
-                <!-- CSR Initiative -->
+                <!-- Corporate Social Responsibility Initiative -->
                 <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="csr" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
                         <a href="img/galleryimages/2. .jpg" data-fancybox="gallery" data-caption="Community Events - Guest Entertainment">
@@ -510,7 +510,7 @@
                     </div>
                 </div>
                 
-                <!-- CSR Initiative -->
+                <!-- Corporate Social Responsibility Initiative -->
                 <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="csr" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
                         <a href="img/galleryimages/4. .jpg" data-fancybox="gallery" data-caption="Community Partnership - Local Engagement">
@@ -558,7 +558,7 @@
                     </div>
                 </div>
                 
-                <!-- CSR Initiative -->
+                <!-- Corporate Social Responsibility Initiative -->
                 <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="csr" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
                         <a href="img/galleryimages/11. .jpg" data-fancybox="gallery" data-caption="Social Events - Community Building">
@@ -574,7 +574,7 @@
                     </div>
                 </div>
                 
-                <!-- CSR Initiative -->
+                <!-- Corporate Social Responsibility Initiative -->
                 <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="csr" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
                         <a href="img/galleryimages/12. .jpg" data-fancybox="gallery" data-caption="School Support - Excited Children">
@@ -590,7 +590,7 @@
                     </div>
                 </div>
                 
-                <!-- CSR Initiative -->
+                <!-- Corporate Social Responsibility Initiative -->
                 <div class="col-lg-4 col-md-6 gallery-grid-item visible" data-category="csr" data-wow-delay="0.1s">
                     <div class="gallery-item h-100">
                         <a href="img/galleryimages/13. .jpg" data-fancybox="gallery" data-caption="Community Water Point">
@@ -769,6 +769,9 @@
     <!-- Gallery Script -->
     <script>
         $(document).ready(function() {
+            // Hide CSR items on initial page load
+            $('.gallery-grid-item[data-category="csr"]').removeClass('visible').addClass('hidden');
+            
             // Initialize Fancybox
             Fancybox.bind("[data-fancybox]", {
                 loop: true,
@@ -818,7 +821,14 @@
                 setTimeout(() => {
                     // Show filtered items
                     if (category === 'all') {
-                        $('.gallery-grid-item').removeClass('hidden').addClass('visible');
+                        // Show all items except Corporate Social Responsibility items
+                        $('.gallery-grid-item').each(function() {
+                            if ($(this).data('category') !== 'csr') {
+                                $(this).removeClass('hidden').addClass('visible');
+                            } else {
+                                $(this).addClass('hidden').removeClass('visible');
+                            }
+                        });
                     } else {
                         $(`.gallery-grid-item[data-category="${category}"]`).removeClass('hidden').addClass('visible');
                     }
@@ -849,7 +859,7 @@
                 filterGallery(filter);
             });
             
-            // Keyboard navigation for filters (1 for All, 2 for CSR)
+            // Keyboard navigation for filters (1 for All, 2 for Corporate Social Responsibility)
             $(document).on('keydown', function(e) {
                 if (e.key === '1') filterGallery('all');
                 if (e.key === '2') filterGallery('csr');
